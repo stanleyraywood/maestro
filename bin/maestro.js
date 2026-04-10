@@ -94,10 +94,10 @@ program
     console.log(`  ${GOLD}Design Critique${RESET}`);
     console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
 
-    console.log('  maestro --voice rams        begin a session');
-    console.log('  maestro --typeface futura   critique your type usage');
+    console.log('  maestro --voice rams              begin a session');
+    console.log('  maestro --typeface futura         critique your type usage');
     console.log('  maestro --debate rams vignelli');
-    console.log('  maestro --list              see the cast');
+    console.log('  maestro --list                    see the cast');
     console.log();
     console.log(`  ${DIM}maestro --help if you need it. they wouldn't.${RESET}`);
     console.log();
