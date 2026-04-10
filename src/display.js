@@ -47,10 +47,23 @@ const MORRIS_ART = `
            ,dddo:..         ........'...'.';;::,...
             .loc,.,.       ..............'',,;:,.'..`.trim();
 
+const LOGO = `
+                        __
+  __ _  ___ ____ ___ / /________
+ /  ' \\/ _ \`/ -_|_-</ __/ __/ _ \\_
+/_/_/_/\\_,_/\\__/___/\\__/_/  \\___(_)`.trim();
+
 export function printMorris() {
   for (const line of MORRIS_ART.split('\n')) {
     console.log(`  ${DIM}${line}${RESET}`);
   }
+}
+
+export function printLogo() {
+  for (const line of LOGO.split('\n')) {
+    console.log(`  ${BOLD}${line}${RESET}`);
+  }
+  console.log();
 }
 
 function termWidth() {

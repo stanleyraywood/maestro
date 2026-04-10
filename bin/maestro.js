@@ -3,7 +3,7 @@
 import { program } from 'commander';
 import { startSession } from '../src/session.js';
 import { startDebate } from '../src/debate.js';
-import { listCast, printHeader, printMorris, printSeparator, printSystem } from '../src/display.js';
+import { listCast, printHeader, printLogo, printMorris, printSeparator, printSystem } from '../src/display.js';
 import { VOICES, TYPEFACES } from '../src/voices.js';
 import { needsOnboarding } from '../src/config.js';
 import { runOnboarding } from '../src/onboarding.js';
@@ -90,7 +90,8 @@ program
     console.log();
     printMorris();
     console.log();
-    printHeader();
+    printLogo();
+    console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
 
     console.log('  maestro --voice rams        begin a session');
     console.log('  maestro --typeface futura   critique your type usage');
