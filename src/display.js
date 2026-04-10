@@ -111,5 +111,5 @@ export function listCast() {
   }
 
   console.log(`\n  ${DIM}${RULE_CHAR.repeat(ruleWidth())}${RESET}`);
-  console.log(`  ${DIM}maestro --voice rams to begin.${RESET}\n`);
+  console.log(`  ${DIM}maestro --voice morris to begin.${RESET}\n`);
 }

@@ -8,6 +8,7 @@ import { VOICES, TYPEFACES } from '../src/voices.js';
 import { needsOnboarding } from '../src/config.js';
 import { runOnboarding } from '../src/onboarding.js';
 import { setProvider } from '../src/api.js';
+import { scrapeDesignContext } from '../src/scrape.js';
 
 const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
@@ -22,6 +23,7 @@ program
   .option('--typeface <name>', 'get feedback from a typeface designer')
   .option('--debate <voices...>', 'two voices review your work')
   .option('--list', 'show the cast')
+  .option('--url <url>', 'submit a website for critique')
   .option('--provider <name>', 'anthropic or openai')
   .action(async (opts) => {
     if (opts.provider) {
@@ -63,6 +65,12 @@ program
       }
     }
 
+    // --url requires a voice
+    if (opts.url && !opts.voice) {
+      console.log('--url needs a voice. e.g. maestro --url https://example.com --voice morris');
+      process.exit(1);
+    }
+
     // commands that need the API — check for onboarding
     const needsApi = opts.voice || opts.typeface || opts.debate;
 
@@ -77,7 +85,16 @@ program
     }
 
     if (opts.voice) {
-      await startSession(opts.voice.toLowerCase(), 'voice');
+      let urlContext = null;
+      if (opts.url) {
+        try {
+          urlContext = await scrapeDesignContext(opts.url);
+        } catch (err) {
+          console.log(`  could not fetch ${opts.url}: ${err.message}`);
+          process.exit(1);
+        }
+      }
+      await startSession(opts.voice.toLowerCase(), 'voice', urlContext);
       return;
     }
 
@@ -94,9 +111,10 @@ program
     console.log(`  ${GOLD}Design Critique${RESET}`);
     console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
 
-    console.log('  maestro --voice rams              begin a session');
-    console.log('  maestro --typeface futura         critique your type usage');
-    console.log('  maestro --debate rams vignelli');
+    console.log('  maestro --voice morris            begin a session');
+    console.log('  maestro --typeface baskerville    critique your type usage');
+    console.log('  maestro --debate eames vignelli');
+    console.log('  maestro --url https://example.com --voice rand');
     console.log('  maestro --list                    see the cast');
     console.log();
     console.log(`  ${DIM}maestro --help if you need it. they wouldn't.${RESET}`);

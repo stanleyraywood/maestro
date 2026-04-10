@@ -18,7 +18,7 @@ function createPrompt() {
   };
 }
 
-export async function startSession(name, type = 'voice') {
+export async function startSession(name, type = 'voice', urlContext = null) {
   const voice = loadVoice(name, type);
 
   if (!voice) {
@@ -32,12 +32,16 @@ export async function startSession(name, type = 'voice') {
   printSystem('consulting the archive.');
   printSystem('/quit to end. /save to save a checkpoint.');
 
+  const openingPrompt = urlContext
+    ? `a designer has submitted their website for your review. here is the analysis:\n\n${urlContext}\n\nintroduce yourself in one line, then begin your critique based on the design signals. ask your three questions.`
+    : 'begin the session. introduce yourself in one line and ask the designer to describe their work.';
+
   const opening = await chat(voice.systemPrompt, [
-    { role: 'user', content: 'begin the session. introduce yourself in one line and ask the designer to describe their work.' }
+    { role: 'user', content: openingPrompt }
   ]);
 
   messages.push(
-    { role: 'user', content: 'begin the session. introduce yourself in one line and ask the designer to describe their work.' },
+    { role: 'user', content: openingPrompt },
     { role: 'assistant', content: opening }
   );
 

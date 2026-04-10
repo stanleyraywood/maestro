@@ -74,13 +74,13 @@ export async function runOnboarding() {
 
   printSeparator();
 
-  console.log(`  ${GOLD}rams${RESET}            "what have you removed?"`);
+  console.log(`  ${GOLD}morris${RESET}          "who benefits from this existing?"`);
+  console.log(`  ${GOLD}eames${RESET}           "does it do what it says honestly?"`);
   console.log(`  ${GOLD}vignelli${RESET}        "how many typefaces?"`);
-  console.log(`  ${GOLD}bringhurst${RESET}      "what is the measure?"`);
 
   printSeparator();
 
-  console.log('  maestro --voice rams       to begin.');
+  console.log('  maestro --voice morris     to begin.');
   console.log('  maestro --list             see the full cast.');
   console.log(`  ${DIM}/quit to end a session.${RESET}\n`);
 
