@@ -80,6 +80,13 @@ export async function startDebate(name1, name2) {
     if (!userInput) continue;
     if (userInput === '/quit' || userInput === '/q') break;
 
+    if (userInput === '/' || userInput === '/help') {
+      printSystem('/quit    end the session');
+      printSystem('/save    save transcript');
+      printSystem('/help    show this');
+      continue;
+    }
+
     if (userInput === '/save') {
       const file = saveTranscript(`debate-${name1}-${name2}`, transcript);
       printSystem(`transcript saved to ${file}`);

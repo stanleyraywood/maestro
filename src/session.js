@@ -56,6 +56,13 @@ export async function startSession(name, type = 'voice', urlContext = null) {
     if (!input) continue;
     if (input === '/quit' || input === '/q') break;
 
+    if (input === '/' || input === '/help') {
+      printSystem('/quit    end the session');
+      printSystem('/save    save transcript');
+      printSystem('/help    show this');
+      continue;
+    }
+
     if (input === '/save') {
       const file = saveTranscript(name, messages);
       printSystem(`transcript saved to ${file}`);
