@@ -1,33 +1,10 @@
 import readline from 'readline';
 import { saveConfig } from './config.js';
-import { printHeader, printSeparator, printSystem } from './display.js';
+import { printMascot, printLogo, printSeparator, printSystem } from './display.js';
 
 const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
-const ITALIC = '\x1b[3m';
-
-const QUOTES = [
-  {
-    text: 'indifference towards people and the reality\n  in which they live is actually the one and\n  only cardinal sin in design.',
-    author: 'dieter rams',
-  },
-  {
-    text: 'the life of a designer is a life of fight:\n  fight against the ugliness.',
-    author: 'massimo vignelli',
-  },
-  {
-    text: 'the details are not the details.\n  they make the design.',
-    author: 'charles eames',
-  },
-  {
-    text: 'have nothing in your houses that you do not\n  know to be useful, or believe to be beautiful.',
-    author: 'william morris',
-  },
-  {
-    text: 'typography exists to honor content.',
-    author: 'robert bringhurst',
-  },
-];
+const GOLD = '\x1b[38;2;204;170;68m';
 
 function ask(rl, question) {
   return new Promise((resolve) => {
@@ -40,30 +17,24 @@ function maskKey(key) {
   return key.slice(0, 7) + '·'.repeat(Math.min(key.length - 7, 20));
 }
 
-function randomQuote() {
-  return QUOTES[Math.floor(Math.random() * QUOTES.length)];
-}
-
 export async function runOnboarding() {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  const quote = randomQuote();
-
   console.log();
-  printHeader();
-  console.log(`  ${DIM}${ITALIC}"${quote.text}"${RESET}`);
-  console.log(`  ${DIM}— ${quote.author}${RESET}\n`);
+  printMascot();
+  printLogo();
+  console.log(`  ${DIM}argue with the people who set the standards.${RESET}  ${DIM}v0.1.0${RESET}\n`);
 
   printSeparator();
 
   console.log('  first time? let\'s set up.\n');
 
   console.log('  which provider?');
-  console.log('  [1] anthropic (claude)');
-  console.log('  [2] openai (chatgpt)\n');
+  console.log(`    ${GOLD}[1]${RESET} anthropic (claude)`);
+  console.log(`    ${GOLD}[2]${RESET} openai (chatgpt)\n`);
 
   let provider;
   while (true) {
@@ -100,19 +71,19 @@ export async function runOnboarding() {
 
   saveConfig({ provider, apiKey });
 
-  console.log(`\n  saved. key: ${maskKey(apiKey)}`);
+  console.log(`\n  ${GOLD}✓${RESET} saved. key: ${DIM}${maskKey(apiKey)}${RESET}`);
 
   printSeparator();
 
-  console.log(`  ${DIM}rams${RESET}            "what have you removed?"`);
-  console.log(`  ${DIM}vignelli${RESET}        "how many typefaces?"`);
-  console.log(`  ${DIM}bringhurst${RESET}      "what is the measure?"`);
+  console.log(`  ${GOLD}rams${RESET}            "what have you removed?"`);
+  console.log(`  ${GOLD}vignelli${RESET}        "how many typefaces?"`);
+  console.log(`  ${GOLD}bringhurst${RESET}      "what is the measure?"`);
 
   printSeparator();
 
   console.log('  maestro --voice rams       to begin.');
-  console.log('  maestro --list             to see the full cast.');
-  console.log(`  ${DIM}type /quit or /q to end a session.${RESET}\n`);
+  console.log('  maestro --list             see the full cast.');
+  console.log(`  ${DIM}/quit to end a session.${RESET}\n`);
 
   rl.close();
 }
