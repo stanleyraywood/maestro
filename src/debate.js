@@ -4,6 +4,9 @@ import { chat } from './api.js';
 import { printDebateVoice, printSeparator, printSystem } from './display.js';
 import { saveTranscript } from './transcript.js';
 
+const DIM = '\x1b[2m';
+const RESET = '\x1b[0m';
+
 function createPrompt() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -11,7 +14,10 @@ function createPrompt() {
   });
 
   return {
-    ask: () => new Promise((resolve) => {
+    ask: (showHint = false) => new Promise((resolve) => {
+      if (showHint) {
+        console.log(`  ${DIM}/quit · /save · /help${RESET}`);
+      }
       rl.question('> ', (answer) => resolve(answer.trim()));
     }),
     close: () => rl.close(),
@@ -48,7 +54,7 @@ export async function startDebate(name1, name2) {
   const prompt = createPrompt();
 
   // first: get user's description
-  const input = await prompt.ask();
+  const input = await prompt.ask(true);
   if (!input || input === '/quit' || input === '/q') {
     prompt.close();
     return;

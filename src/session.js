@@ -4,6 +4,9 @@ import { chat } from './api.js';
 import { printVoice, printSystem } from './display.js';
 import { saveTranscript } from './transcript.js';
 
+const DIM = '\x1b[2m';
+const RESET = '\x1b[0m';
+
 function createPrompt() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -11,7 +14,10 @@ function createPrompt() {
   });
 
   return {
-    ask: () => new Promise((resolve) => {
+    ask: (showHint = false) => new Promise((resolve) => {
+      if (showHint) {
+        console.log(`  ${DIM}/quit · /save · /help${RESET}`);
+      }
       rl.question('> ', (answer) => resolve(answer.trim()));
     }),
     close: () => rl.close(),
@@ -49,9 +55,11 @@ export async function startSession(name, type = 'voice', urlContext = null) {
 
   // conversation loop
   const prompt = createPrompt();
+  let firstPrompt = true;
 
   while (true) {
-    const input = await prompt.ask();
+    const input = await prompt.ask(firstPrompt);
+    firstPrompt = false;
 
     if (!input) continue;
     if (input === '/quit' || input === '/q') break;
