@@ -91,7 +91,7 @@ program
 
     console.log();
     printLogo();
-    console.log(`  ${GOLD}Design Critique${RESET}                                              ${DIM}v0.1.0${RESET}`);
+    console.log(`  ${GOLD}Design Critique${RESET}`);
     console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
 
     console.log('  maestro --voice rams        begin a session');
