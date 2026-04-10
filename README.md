@@ -1,4 +1,4 @@
-# maestro.
+# maestro
 
 a CLI that lets designers argue with the dead.
 
