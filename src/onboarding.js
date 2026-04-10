@@ -1,6 +1,6 @@
 import readline from 'readline';
 import { saveConfig } from './config.js';
-import { printMascot, printLogo, printSeparator, printSystem } from './display.js';
+import { printLogo, printSeparator, printSystem } from './display.js';
 
 const DIM = '\x1b[2m';
 const RESET = '\x1b[0m';
@@ -24,7 +24,6 @@ export async function runOnboarding() {
   });
 
   console.log();
-  printMascot();
   printLogo();
   console.log(`  ${DIM}argue with the people who set the standards.${RESET}  ${DIM}v0.1.0${RESET}\n`);
 
