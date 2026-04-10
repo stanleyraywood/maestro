@@ -3,7 +3,7 @@
 import { program } from 'commander';
 import { startSession } from '../src/session.js';
 import { startDebate } from '../src/debate.js';
-import { listCast, printHeader, printSystem } from '../src/display.js';
+import { listCast, printHeader, printMorris, printSeparator, printSystem } from '../src/display.js';
 import { VOICES, TYPEFACES } from '../src/voices.js';
 import { needsOnboarding } from '../src/config.js';
 import { runOnboarding } from '../src/onboarding.js';
@@ -87,6 +87,8 @@ program
     }
 
     // no args — show welcome
+    console.log();
+    printMorris();
     console.log();
     printHeader();
 

@@ -8,6 +8,51 @@ const ITALIC = '\x1b[3m';
 const RULE_CHAR = '─';
 const BORDER_CHAR = '│';
 
+// William Morris, cropped portrait — jp2a, 40 cols
+const MORRIS_ART = `
+       ..........''''',,'..',;,,'.',,,;;;;;;;,,
+     ...........''''',,,'.',;;;;;;,,,,;;;;;;;;;,
+    .........''''''',,,'''',;;;;;,,;;,;;;;;;;;;,
+    ..........'''''',,,,''',;;;;;,,;;;;;;;;;;;;;;
+    ...........'''.',,,,'.',;;;;;,';;;;,;;;;;;;;;
+    .........''';,...''..','..',,,,,,;;,,;;;;;;;;;,
+    .........,'''.........'',,,,,,,',;,,,,,;;;;;;;'
+    ........',,...  ..  .',;:::;,,'',,,,,,,,,,,,,,,'
+    ........ .'..          ..';oc,'.,',,,,,,,,,,,,,'
+    ......  .......  ......';:,';l;,,,',,,,,,',,,'''
+    .........     .....,;olkkOkcll:;;;;,,,,,,,'''''''
+    .........    . ..cxO0000KKkdxdoc:;;,,,,,'''''''''
+   ........     ..,,;oxO00KKK0KKK0xoc:,,;,','''''''''
+    ........   ..:lxkkOO000000kkkkOxoo:...,''''''.''..
+   .........  .':ldxkkOOOkOO00OOOkkkko;,...','''''.....
+  .........  .'';:clodxkOkkk000Okddodkd;.,..'''''..'.'
+   ......... .',.':coxkkOOkxkkocoxkxcdxo;.,.','''''''''
+  ........   .''..';codxxkkxc;;c:,,;ckkxdl:c..'''''''''
+.................;::::::::dkx;:ocxO00K0Oxxll'..........
+.........  ......';:,...;kKOkxdkkO00kxxxdlc:;'''......
+.........  .. .. ...;oo:'c0KO000000Okxxdocl::;,,,,,,,,,
+..........   ..  ...';clo:'c00kkxkOOOOkkdlcdkxl:'..''''
+..............   .,;;::clc';dKkxoodxkkkxl::dOOOkdc.....
+............,:,....',;clol;.;lc,;OOOkkxkdc:;cdxxxo,....
+...........,':ccd;.',;:cldl'...,;:olccldxoc:lolllc:....
+...........,;llool;.',;cllc:'......'::::::::ccolcc;,...
+  .........':cloddol,..';c,....',;cllcodl:;::lc:;,'. .
+   ........,:codxdddl'...;,''',:oooxkxdoclll::c,,;'..
+    .......'::lloodxdoc'.''.';c;ccclcoxxdxlcc:;lc''.'.
+    .......,cclloddddoc. ...':ccc;lcc;oddll:,:;;c,'..
+    ......,lododddooc;.. ....,,,;cclollc:::;',':,'''..
+    ....  .coxkkxdl:;'.. ....'.,,,c:;lcol:;;,',,:,'....
+          .lodxxdl,..      .....,,,;;',':l:,,,',......
+          .odxxdl,.       . .......''..''c:;,,,.....
+           ,dddo:..         ........'...'.';;::,...
+            .loc,.,.       ..............'',,;:,.'..`.trim();
+
+export function printMorris() {
+  for (const line of MORRIS_ART.split('\n')) {
+    console.log(`  ${DIM}${line}${RESET}`);
+  }
+}
+
 function termWidth() {
   return process.stdout.columns || 80;
 }
