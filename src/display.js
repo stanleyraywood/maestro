@@ -5,22 +5,11 @@ const RESET = '\x1b[0m';
 const BOLD = '\x1b[1m';
 const ITALIC = '\x1b[3m';
 
+// mustard gold — 24-bit ANSI color
+const GOLD = '\x1b[38;2;204;170;68m';
+
 const RULE_CHAR = '─';
 const BORDER_CHAR = '│';
-
-const ICON = `
-    ██████╗           ██████╗
-    ███████╗         ███████║
-    ████████╗       ████████║
-    ██╔█████╗     ╔█████╔██║
-    ██║╚█████╗   ╔█████╝║██║
-    ██║ ╚█████╗ ╔█████╝ ║██║
-    ██║  ╚█████████╝╝   ║██║
-    ██║   ╚███████╝     ║██║
-    ██║    ╚█████╝      ║██║
-    ██║     ╚███╝       ║██║
-    ██║      ╚█╝        ║██║
-    ╚═╝                 ╚══╝`.trim();
 
 const LOGO = `
                                                     ░██
@@ -31,15 +20,9 @@ const LOGO = `
 ░██   ░██   ░██ ░██   ░██  ░██               ░██    ░██    ░██      ░██    ░██
 ░██   ░██   ░██  ░█████░██  ░███████   ░███████      ░████ ░██       ░███████`.trim();
 
-export function printIcon() {
-  for (const line of ICON.split('\n')) {
-    console.log(`  ${BOLD}${line}${RESET}`);
-  }
-}
-
 export function printLogo() {
   for (const line of LOGO.split('\n')) {
-    console.log(`  ${BOLD}${line}${RESET}`);
+    console.log(`  ${GOLD}${line}${RESET}`);
   }
   console.log();
 }
@@ -86,7 +69,7 @@ export function printSeparator() {
 export function printVoice(name, text) {
   const width = Math.min(72, termWidth() - 2);
   const wrapped = wrapText(text, width);
-  console.log(`\n  ${BOLD}${name}${RESET}`);
+  console.log(`\n  ${GOLD}${BOLD}${name}${RESET}`);
   for (const line of wrapped) {
     console.log(line);
   }
@@ -96,7 +79,7 @@ export function printVoice(name, text) {
 export function printDebateVoice(name, text) {
   const width = Math.min(68, termWidth() - 6);
   const wrapped = wrapText(text, width, '');
-  console.log(`\n  ${BOLD}${name}${RESET}`);
+  console.log(`\n  ${GOLD}${BOLD}${name}${RESET}`);
   for (const line of wrapped) {
     console.log(`  ${DIM}${BORDER_CHAR}${RESET} ${line}`);
   }
@@ -108,7 +91,8 @@ export function printSystem(text) {
 
 export function listCast() {
   console.log();
-  printHeader();
+  printLogo();
+  console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
   console.log(`  ${BOLD}the cast.${RESET}`);
   console.log(`  ${DIM}${RULE_CHAR.repeat(ruleWidth())}${RESET}\n`);
 
@@ -116,13 +100,13 @@ export function listCast() {
 
   const pad = 16;
   for (const [key, v] of Object.entries(VOICES)) {
-    console.log(`    ${key.padEnd(pad)}${DIM}${v.domain}${RESET}`);
+    console.log(`    ${GOLD}${key.padEnd(pad)}${RESET}${DIM}${v.domain}${RESET}`);
   }
 
   console.log(`\n  ${BOLD}typefaces${RESET}\n`);
 
   for (const [key, t] of Object.entries(TYPEFACES)) {
-    console.log(`    ${key.padEnd(pad)}${DIM}${t.designer}, ${t.year}${RESET}`);
+    console.log(`    ${GOLD}${key.padEnd(pad)}${RESET}${DIM}${t.designer}, ${t.year}${RESET}`);
   }
 
   console.log(`\n  ${DIM}${RULE_CHAR.repeat(ruleWidth())}${RESET}`);
