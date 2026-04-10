@@ -87,9 +87,12 @@ program
     }
 
     // no args — show welcome
+    const GOLD = '\x1b[38;2;204;170;68m';
+
     console.log();
     printMascot();
     printLogo();
+    console.log(`  ${GOLD}Design Critique${RESET}                                              ${DIM}v0.1.0${RESET}`);
     console.log(`  ${DIM}argue with the people who set the standards.${RESET}\n`);
 
     console.log('  maestro --voice rams        begin a session');
